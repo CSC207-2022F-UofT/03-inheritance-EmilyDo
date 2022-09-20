@@ -14,7 +14,9 @@ public abstract class Bag {
      *       - an array of Strings named contents
      */
 
-
+    String color;
+    int numberOfContents, capacity;
+    String[] contents;
 
 
     /*
@@ -27,6 +29,11 @@ public abstract class Bag {
      * its contents.)
      */
 
+    public Bag(String color, int capacity) {
+        this.color = color;
+        this.capacity = capacity;
+        contents = new String[capacity]; // want to set len of array to capacity
+    }
 
 
 
@@ -38,15 +45,26 @@ public abstract class Bag {
      *           - getCapacity
      */
 
+    public String getColor() {
+        return color;
+    }
 
+    public int getNumberOfContents() {
+        return numberOfContents;
+    }
 
+    public int getCapacity() {
+        return capacity;
+    }
 
     /*
      * TODO: Create a setter function called setColor which sets the
      *       color of this bag to the given color.
      */
 
-
+    public void setColor(String col) {
+        this.color = col;
+    }
 
 
 
@@ -61,7 +79,13 @@ public abstract class Bag {
      *       and false otherwise.
      */
 
+    public void addItem(String item) {
 
+        if (numberOfContents < capacity) {
+            contents[numberOfContents] = item;
+            numberOfContents ++;
+        }
+    }
 
 
 
@@ -76,6 +100,22 @@ public abstract class Bag {
      * @return
      */
 
+    public String popItem() {
+        String[] new_contents = new String[numberOfContents - 1];
+
+        if (contents != null) {
+            numberOfContents --;
+            // iterate through the contents
+            for (int index = 0; index < numberOfContents; index ++) {
+                new_contents[index] = contents[index];
+            }
+            String last_item = contents[numberOfContents];
+            contents = new_contents;
+            return last_item;
+        }
+        return null;
+    }
+
 
 
 
@@ -87,7 +127,7 @@ public abstract class Bag {
      */
     public void increaseCapacity(int n) {
         // TODO: Implement this method.
-
+        capacity += n;
     }
 
     /**
